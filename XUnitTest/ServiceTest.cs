@@ -24,7 +24,7 @@ public class ServiceTest
     }
 
     [FactAttribute]
-    public async Task SpecialBlog()
+    public async Task SpecialBlogTest()
     {
         var result = await _mockController.SpecialBlog().ConfigureAwait(true);
 

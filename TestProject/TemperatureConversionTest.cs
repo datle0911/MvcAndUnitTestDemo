@@ -14,7 +14,7 @@ public class TemperatureConversionTest
 {
 
     [TestMethod]
-    public void TestTemperatureConversion()
+    public void Test()
     {
         double tc = 22;
         double tf;
