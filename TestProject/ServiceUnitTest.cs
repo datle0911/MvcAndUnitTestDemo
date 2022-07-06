@@ -13,44 +13,6 @@ namespace TestProject;
 public class ServiceUnitTest
 {
 
-    //[TestMethod]
-    //public async void SpecialBlogTest()
-    //{
-    //    // Arrange
-
-    //    // Act
-    //    var result = _mockService.SpecialBlog();
-
-    //    // Assert
-    //    Assert.IsTrue(result.Result.Length > 0);
-    //}
-
-    //[TestMethod]
-    //public async void MockDataTest()
-    //{
-    //    // Arrange
-    //    var mockService = new MockService(_httpClientFactory);
-
-    //    // Act
-    //    var result = await mockService.MockData();
-
-    //    // Assert
-    //    Assert.IsTrue(result.Length > 0);
-    //}
-
-    //[TestMethod]
-    //public async void ErrorCodeTest()
-    //{
-    //    // Arrange
-    //    var mockService = new MockService(_httpClientFactory);
-
-    //    // Act
-    //    var result = await mockService.ErrorCode();
-
-    //    // Assert
-    //    Assert.IsTrue(result == 403);
-    //}
-
     [TestMethod]
     public void TestTemperatureConversion()
     {
