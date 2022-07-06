@@ -17,10 +17,8 @@ public class TemperatureConversionTest
     public void Test()
     {
         double tc = 22;
-        double tf;
+        double tf = Temperature.CelciusToFahrenheit(tc);
         double expectedTf = 71.6;
-
-        tf = Temperature.CelciusToFahrenheit(tc);
 
         Assert.AreEqual(tf, expectedTf, 0.001, "Wrong Conversion");
     }
