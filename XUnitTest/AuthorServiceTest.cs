@@ -30,7 +30,6 @@ public class AuthorServiceTest
     [Fact]
     public void GetAllAuthors_ReturnTrue()
     {
-        var authorId = 1;
         //var authorId = 5;
         var role = _mockAuthorService.Object.GetAllAuthors().GetAwaiter().GetResult();
 

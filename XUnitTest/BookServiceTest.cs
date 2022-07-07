@@ -29,7 +29,7 @@ public class BookServiceTest
     [Fact]
     public void GetLimitedBooks_AdminCall_ReturnAllBooks()
     {
-        var result = _booksController.GetListBooks(1).Result.Value;
+        var result = _mockBookService.Object.GetListBooks().Result;
 
         // Assert
         Assert.NotNull(result);

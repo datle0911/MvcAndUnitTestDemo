@@ -13,7 +13,7 @@ public class BooksController : Controller
     }
 
     [HttpGet("author")]
-    public async Task<ActionResult<List<Book>>> GetListBooks([FromQuery] int id)
+    public async Task<IActionResult> GetListBooks([FromQuery] int id)
     {
         var authorRole = _authorService.FindAuthorRoleById(id);
         if (authorRole.Result == ERole.admin)
