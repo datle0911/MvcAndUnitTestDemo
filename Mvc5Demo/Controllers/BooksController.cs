@@ -6,18 +6,16 @@ public class BooksController : Controller
 {
     private readonly IBookService _bookService;
     private readonly IAuthorService _authorService;
-    private readonly DbContext _dbContext;
-    public BooksController(IBookService bookService, IAuthorService authorService, DbContext dbContext)
+    public BooksController(IBookService bookService, IAuthorService authorService)
     {
         _bookService = bookService;
         _authorService = authorService;
-        _dbContext = dbContext;
     }
 
-    [HttpGet("author/ID/{authorId}")]
-    public async Task<IActionResult> GetListBooks(int authorId)
+    [HttpGet("author")]
+    public async Task<ActionResult<List<Book>>> GetListBooks([FromQuery] int id)
     {
-        var authorRole = _authorService.FindAuthorRoleById(authorId);
+        var authorRole = _authorService.FindAuthorRoleById(id);
         if (authorRole.Result == ERole.admin)
         {
             var books = await _bookService.GetListBooks();
@@ -25,15 +23,16 @@ public class BooksController : Controller
         }
         else if (authorRole.Result == ERole.user)
         {
-            var books = await _bookService.GetLimitedBooks(authorId);
+            var books = await _bookService.GetLimitedBooks(id);
             return Ok(books);
         }
         else return BadRequest();
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetListBooks1()
+    public async Task<IActionResult> GetAllBooks()
     {
-        return Ok(_dbContext.bookList.ToList());
+        var books = await _bookService.GetListBooks();
+        return Ok(books);
     }
 }

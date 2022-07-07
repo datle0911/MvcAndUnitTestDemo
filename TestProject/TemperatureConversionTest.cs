@@ -1,13 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Mvc5Demo.Controllers;
-using Mvc5Demo.Services;
-using Mvc5Demo.Models;
-
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
 namespace TestProject;
 [TestClass]
 public class TemperatureConversionTest

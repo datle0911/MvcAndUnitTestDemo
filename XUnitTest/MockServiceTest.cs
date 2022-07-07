@@ -1,15 +1,9 @@
-using Moq;
-using Mvc5Demo.Controllers;
-using Mvc5Demo.Services;
-using System.Threading.Tasks;
-using Xunit;
-
 namespace XUnitTest;
-public class ServiceTest
+public class MockServiceTest
 {
     private readonly MockController _mockController; 
     private readonly Mock<IMockService> _mockService;
-    public ServiceTest()
+    public MockServiceTest()
     {
         _mockService = new Mock<IMockService>();
         _mockController = new MockController(_mockService.Object);

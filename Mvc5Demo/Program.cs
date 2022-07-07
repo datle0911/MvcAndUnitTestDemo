@@ -6,7 +6,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IMockService, MockService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
-builder.Services.AddSingleton<DbContext>();
+builder.Services.AddTransient<DbContext>();
 
 var app = builder.Build();
 
