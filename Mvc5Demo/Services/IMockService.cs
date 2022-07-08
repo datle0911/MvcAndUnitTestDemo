@@ -5,5 +5,6 @@ public interface IMockService
     public Task<int> ErrorCode();
     public Task<string> SpecialBlog();
     public Task<string> MockData();
+    public Task<List<Customer>> MockJsonData();
 
 }

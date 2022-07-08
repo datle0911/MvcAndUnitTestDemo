@@ -16,6 +16,13 @@ public class MockController : Controller
         return View();
     }
 
+    [HttpGet("JsonData")]
+    public async Task<IActionResult> HttpClientGetJsonObjects()
+    {
+        var objects = await _mockService.MockJsonData();
+        return Ok(objects);
+    }
+
     [HttpGet("SpecialBlog")]
     public async Task<IActionResult> SpecialBlog()
     {

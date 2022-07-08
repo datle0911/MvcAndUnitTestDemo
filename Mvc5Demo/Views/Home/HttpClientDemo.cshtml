@@ -1,0 +1,12 @@
+﻿@*@page "/demo"
+@inject IHttpClientFactory _clientFactory
+
+<h3>Mock Data</h3>
+@code{
+    protected override Task OnInitAsync(){
+        var request = new HttpRequestMessage(HttpMethod.Get,
+            "https://deliverywebapi.azurewebsites.net/api/customers");
+
+        var client = _clientFactory.CreateClient
+    }
+}*@

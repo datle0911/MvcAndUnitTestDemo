@@ -3,9 +3,11 @@
 public class MockService : IMockService
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    public MockService(IHttpClientFactory httpClientFactory)
+    private readonly HttpClient _httpClient;
+    public MockService(IHttpClientFactory httpClientFactory, HttpClient httpClient)
     {
         _httpClientFactory = httpClientFactory;
+        _httpClient = httpClient;
     }
 
     public async Task<int> ErrorCode()
@@ -34,6 +36,45 @@ public class MockService : IMockService
         var end = httpResponse.Content.ReadAsStringAsync();
 
         return (end.Result + "\n \n              -----------------GET thanh cong va chuyen ve string---------------");
+    }
+
+    public async Task<List<Customer>> MockJsonData()
+    {
+        // return result
+        var result = new List<Customer>();
+
+        // http client factory
+        var httpRequestMessage = new HttpRequestMessage(
+            HttpMethod.Get,
+            "https://deliverywebapi.azurewebsites.net/api/customers");
+
+        var httpClient = _httpClientFactory.CreateClient();
+        var httpResponse = await httpClient.SendAsync(httpRequestMessage);
+
+        var content = await httpResponse.Content.ReadFromJsonAsync<List<Customer>>();
+
+        // modify content
+        content.First().CustomerUserName = "Get bằng IHttpClientFactory nè";
+
+        // duplicate content and add to result
+        for (int i = 0; i < 2; i++)
+        {
+            result.AddRange(content);
+        }
+
+        // http client
+        var content2 = await _httpClient.GetFromJsonAsync<List<Customer>>("https://deliverywebapi.azurewebsites.net/api/customers");
+
+        // modify content
+        content2.First().CustomerFullName = "CÒN ĐÂY LÀ GET BẰNG HTTP CLIENT BTH";
+
+        // duplicate content and add to result
+        for (int i = 0; i < 2; i++)
+        {
+            result.AddRange(content2);
+        }
+
+        return result;
     }
 
     public async Task<string> SpecialBlog()
