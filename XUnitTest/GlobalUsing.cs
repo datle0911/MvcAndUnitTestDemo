@@ -10,5 +10,6 @@ global using Mvc5Demo.Controllers;
 global using Mvc5Demo.Services;
 global using Mvc5Demo.Infrastructure;
 global using Mvc5Demo.Models.Enums;
+global using Mvc5Demo.Models;
 
 global using Xunit;

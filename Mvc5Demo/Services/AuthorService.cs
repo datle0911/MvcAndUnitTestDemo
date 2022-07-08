@@ -10,11 +10,19 @@ public class AuthorService : IAuthorService
 
     public Task<ERole> FindAuthorRoleById(int authorId)
     {
-        var author = _dbContext
-            .authorList
-            .FirstOrDefault(a => a.Id == authorId);
+        try
+        {
+            var author = _dbContext
+                .authorList
+                .FirstOrDefault(a => a.Id == authorId);
 
-        return Task.FromResult(author.Role);
+            return Task.FromResult(author.Role);
+        }
+
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     public Task<List<Author>> GetAllAuthors()

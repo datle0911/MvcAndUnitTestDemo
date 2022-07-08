@@ -29,10 +29,58 @@ public class BooksControllerTest
     [Fact]
     public async Task GetListBooks_OnSuccess_ReturnsStatusCode200()
     {
+        var authorId = 1;
         var sut = new BooksController(_mockBookService.Object, _mockAuthorService.Object);
 
-        var result = (OkObjectResult)await sut.GetListBooks(1);
+        var result = (OkObjectResult)await sut.GetListBooks(authorId);
 
         Assert.True(result.StatusCode == 200);
     }
+
+    [Fact]
+    public async Task GetListBooks_OnSuccess_InvokesBookService()
+    {
+        // Arrange
+        var mockBookService = new Mock<IBookService>();
+        var mockAuthorService = new Mock<IAuthorService>();
+        var authorId = 1;
+
+        mockBookService
+            .Setup(service => service.GetListBooks())
+            .ReturnsAsync(new List<Book>());
+
+        var sut = new BooksController(mockBookService.Object, mockAuthorService.Object);
+
+        // Act
+        var result = await sut.GetListBooks(authorId);
+
+        // Assert
+        mockBookService.Verify(service => service.GetListBooks(), Times.Once());
+        //mockBookService.Verify(service => service.GetLimitedBooks(authorId), Times.Once());
+    }
+
+    //[Fact]
+    //public async Task GetListBooks_OnSuccess_ReturnsListOfBooks()
+    //{
+    //    // Arrange
+    //    var mockBookService = new Mock<IBookService>();
+    //    var mockAuthorService = new Mock<IAuthorService>();
+    //    var authorId = 1;
+
+    //    mockBookService
+    //        .Setup(service => service.GetListBooks())
+    //        .ReturnsAsync(new List<Book>());
+
+    //    var sut = new BooksController(mockBookService.Object, mockAuthorService.Object);
+
+    //    // Act
+    //    var result = await sut.GetListBooks(authorId);
+
+    //    // Assert
+    //    Assert.True(result is IActionResult);
+    //    var objectResult = (OkObjectResult)result;
+    //    var type = objectResult.Value.GetType();
+
+    //    Assert.NotNull(objectResult);
+    //}
 }
